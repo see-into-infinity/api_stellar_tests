@@ -1,6 +1,6 @@
 package order.tests;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import decorator.LoggingExtension;
 import helpers.order.OrderClient;
 import helpers.order.OrderGenerator;
 import helpers.user.UserClient;
@@ -10,14 +10,16 @@ import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
-import listeners.CustomApiListener;
 import models.order.ResponseGetOrder;
 import models.user.User;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static listeners.CustomApiListener.withCustomTemplates;
 import static org.apache.http.HttpStatus.*;
 
+//добавлен наблюдатель
+@ExtendWith(LoggingExtension.class)
 public class CreateOrderTests {
     private String accessToken;
     private OrderClient orderClient = new OrderClient();
@@ -58,7 +60,8 @@ public class CreateOrderTests {
         //Выполняем проверку полей ответа на метод получения заказа
         ResponseGetOrder responseGetOrder = orderClient.extractListOfUsersOrders(accessToken);
 
-//        Assertions.assertEquals(responseGetOrder.getOrders(), );
+        Assertions.assertNotNull( responseGetOrder.getOrders());
+
 
         
 

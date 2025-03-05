@@ -1,6 +1,7 @@
 package order.tests;
 
 
+import decorator.LoggingExtension;
 import helpers.order.OrderClient;
 import helpers.order.OrderGenerator;
 import helpers.user.UserClient;
@@ -13,10 +14,12 @@ import io.restassured.response.ValidatableResponse;
 import models.order.ResponseGetOrder;
 import models.user.User;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 import static listeners.CustomApiListener.withCustomTemplates;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
-
+@ExtendWith(LoggingExtension.class)
 public class GetListOfOrdersTests {
     private String accessToken;
     private OrderClient orderClient = new OrderClient();

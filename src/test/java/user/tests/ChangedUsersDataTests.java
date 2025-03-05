@@ -1,6 +1,7 @@
 package user.tests;
 
 
+import decorator.LoggingExtension;
 import helpers.user.UserClient;
 import helpers.user.UserGenerator;
 import io.restassured.RestAssured;
@@ -9,11 +10,13 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
 import models.user.User;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static listeners.CustomApiListener.withCustomTemplates;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 
+@ExtendWith(LoggingExtension.class)
 public class ChangedUsersDataTests {
     private String accessToken;
     private UserGenerator userGenerator = new UserGenerator();
